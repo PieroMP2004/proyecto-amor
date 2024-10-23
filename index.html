@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te Amo Idiana</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffccd5;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #ff6b81;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: none;
+            color: #ff6b81;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffe6e9;
+        }
+
+        .heart-button {
+            margin-top: 20px;
+        }
+
+        .proposal {
+            margin-top: 30px;
+        }
+
+        .proposal p {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .respuesta {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ffe6e9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Animación de corazones */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: float 3s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: 10px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-600px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Te Amo, Mi Amor Idiana ❤️</h1>
+        <p id="mensaje">Eres mi todo, gracias por estar a mi lado.</p>
+        <button onclick="generarFrase()">Dime más</button>
+        <button class="heart-button" onclick="crearCorazones()">Mostrar Corazones</button>
+
+        <!-- Apartado de propuesta de matrimonio -->
+        <div class="proposal">
+            <p>¿Te quieres casar conmigo?</p>
+            <button onclick="responderSi()">Sí 💍</button>
+            <button onclick="responderNo()">No 😢</button>
+        </div>
+
+        <p id="respuesta" class="respuesta"></p>
+    </div>
+
+    <script>
+        const frases = [
+            "Mi vida cambió el día que te conocí.",
+            "Eres la razón por la que sonrío cada mañana.",
+            "No hay un solo segundo que no piense en ti.",
+            "Eres mi sueño hecho realidad.",
+            "Cada día a tu lado es un regalo.",
+            "Te amo más de lo que las palabras pueden expresar."
+        ];
+
+        function generarFrase() {
+            const randomIndex = Math.floor(Math.random() * frases.length);
+            document.getElementById('mensaje').textContent = frases[randomIndex];
+        }
+
+        // Función para crear corazones animados
+        function crearCorazones() {
+            const cantidad = 20; // Número de corazones
+            for (let i = 0; i < cantidad; i++) {
+                crearCorazon();
+            }
+        }
+
+        function crearCorazon() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+            // Posición aleatoria
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s"; // Duración aleatoria entre 3s y 5s
+
+            document.body.appendChild(heart);
+
+            // Eliminar corazón después de la animación
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Funciones para la respuesta de la propuesta
+        function responderSi() {
+            document.getElementById('respuesta').textContent = "¡Sí! Estoy tan feliz, amor mío. ¡Seremos los más felices del mundo!";
+            crearCorazones(); // Mostrar corazones al decir que sí
+        }
+
+        function responderNo() {
+            document.getElementById('respuesta').textContent = "uy amor, no hay opcion, es un si o un si.";
+        }
+    </script>
+</body>
+</html>
+
